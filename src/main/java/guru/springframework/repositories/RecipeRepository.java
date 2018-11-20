@@ -3,6 +3,8 @@ package guru.springframework.repositories;
 import guru.springframework.model.Recipe;
 import org.springframework.data.repository.CrudRepository;
 
-public interface RecipeRepository extends CrudRepository<Recipe, Long> {
+import java.util.Optional;
 
+public interface RecipeRepository extends CrudRepository<Recipe, Long> {
+    public Optional<Recipe> findByDescription(String description);
 }
