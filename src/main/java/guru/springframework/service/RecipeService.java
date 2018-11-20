@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 public interface RecipeService {
-    List sth(Model model);
-
-    ///////////////////////
     Set<Recipe> getRecipes();
+    //    List sth(Model model);
 }

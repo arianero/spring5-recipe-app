@@ -8,24 +8,22 @@
 </head>
 <body>
 <table>
-    <th:block th:each="recipe:${recipes}">
-        <tr>
-            <td th:text="${recipe.description}"></td>
-        </tr>
-    </th:block>
+    <tr>
+        <th>ID</th>
+        <th>Description</th>
+    </tr>
+    <tr th:each="recipe : ${recipes}">
+        <td th:text="${recipe.id}">123</td>
+        <td th:text="${recipe.description}">Tasty Goodness</td>
+    </tr>
 </table>
-
 <!--<table>-->
-    <!--<tr>-->
-        <!--<th>ID</th>-->
-        <!--<th>Description</th>-->
-    <!--</tr>-->
-    <!--<tr th:each="recipe : ${recipes}">-->
-        <!--<td th:text="${recipe.id}">123</td>-->
-        <!--<td th:text="${recipe.description}">Tasty Goodness</td>-->
-    <!--</tr>-->
+    <!--<th:block th:each="recipe:${recipes}">-->
+        <!--<tr>-->
+            <!--<td th:text="${recipe.description}"></td>-->
+        <!--</tr>-->
+    <!--</th:block>-->
 <!--</table>-->
-
 </body>
 </html>
 
