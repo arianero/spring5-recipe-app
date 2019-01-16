@@ -1,5 +1,6 @@
 package guru.springframework.domain;
 
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,6 +32,13 @@ public class Ingredient {
     }
 
     public Ingredient(String description, BigDecimal amount, Recipe recipe, UnitOfMeasure uom) {
+        this.description = description;
+        this.amount = amount;
+        this.recipe = recipe;
+        this.uom = uom;
+    }
+
+    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom, Recipe recipe) {
         this.description = description;
         this.amount = amount;
         this.recipe = recipe;
