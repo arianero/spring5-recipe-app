@@ -1,5 +1,6 @@
 package guru.springframework.domain;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @Entity
+@EqualsAndHashCode
 public class UnitOfMeasure {
 
     @Id

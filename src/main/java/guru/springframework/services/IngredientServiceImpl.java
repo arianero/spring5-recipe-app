@@ -5,6 +5,7 @@ import guru.springframework.converters.IngredientCommandToIngredient;
 import guru.springframework.converters.IngredientToIngredientCommand;
 import guru.springframework.domain.Ingredient;
 import guru.springframework.domain.Recipe;
+import guru.springframework.repositories.IngredientRepository;
 import guru.springframework.repositories.RecipeRepository;
 import guru.springframework.repositories.UnitOfMeasureRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -24,14 +25,14 @@ public class IngredientServiceImpl implements IngredientService {
     private final IngredientCommandToIngredient ingredientCommandToIngredient;
     private final RecipeRepository recipeRepository;
     private final UnitOfMeasureRepository unitOfMeasureRepository;
+    private final IngredientRepository ingredientRepository;
 
-    public IngredientServiceImpl(IngredientToIngredientCommand ingredientToIngredientCommand,
-                                 IngredientCommandToIngredient ingredientCommandToIngredient,
-                                 RecipeRepository recipeRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
+    public IngredientServiceImpl(IngredientToIngredientCommand ingredientToIngredientCommand, IngredientCommandToIngredient ingredientCommandToIngredient, RecipeRepository recipeRepository, UnitOfMeasureRepository unitOfMeasureRepository, IngredientRepository ingredientRepository) {
         this.ingredientToIngredientCommand = ingredientToIngredientCommand;
         this.ingredientCommandToIngredient = ingredientCommandToIngredient;
         this.recipeRepository = recipeRepository;
         this.unitOfMeasureRepository = unitOfMeasureRepository;
+        this.ingredientRepository = ingredientRepository;
     }
 
     @Override
@@ -111,5 +112,18 @@ public class IngredientServiceImpl implements IngredientService {
             return ingredientToIngredientCommand.convert(savedIngredientOptional.get());
         }
 
+    }
+
+    @Override
+    @Transactional
+    public void deleteIngredientCommand(IngredientCommand ingredientCommand) {
+        Optional<Recipe> optionalRecipe = recipeRepository.findById(ingredientCommand.getRecipeId());
+        if(optionalRecipe.isPresent()) {
+            Recipe recipe = optionalRecipe.get();
+            Ingredient ingredient = ingredientCommandToIngredient.convert(ingredientCommand);
+            recipe.getIngredients().remove(ingredient);
+            recipeRepository.save(recipe);
+        }
+        ingredientRepository.deleteById(ingredientCommand.getId());
     }
 }
