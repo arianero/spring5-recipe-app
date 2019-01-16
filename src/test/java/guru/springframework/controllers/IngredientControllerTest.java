@@ -155,26 +155,12 @@ public class IngredientControllerTest {
         final Long INGREDIENT_ID = 1L;
         final Long RECIPE_ID = 1L;
 
-//        //given
-//        Recipe recipe = new Recipe();
-//        recipe.setId(RECIPE_ID);
-//
-//        Ingredient ingredient = new Ingredient();
-//        ingredient.setId(INGREDIENT_ID);
-//        ingredient.setRecipe(recipe);
-
         IngredientCommand ingredientCommand = new IngredientCommand();
         ingredientCommand.setId(INGREDIENT_ID);
         ingredientCommand.setRecipeId(RECIPE_ID);
 
-
-//        recipeCommand.setIngredients(new HashSet<Ingredient>(){{add(ingredient);}});
-
         //when
         when(ingredientService.findByRecipeIdAndIngredientId(anyLong(), anyLong())).thenReturn(ingredientCommand);
-//        when(recipeRepository.findById(anyLong())).thenReturn(Optional.of(recipe));
-//        when(ingredientCommandToIngredient.convert(any())).thenReturn(ingredient);
-//        when(recipeRepository.save(any())).thenReturn(recipe);
 
         mockMvc.perform(get("/recipe/1/ingredient/1/delete"))
                 .andExpect(status().is3xxRedirection()) // odpowiednie sprawdzanie statusu dla przekierowań
@@ -182,9 +168,5 @@ public class IngredientControllerTest {
 
         //then
         verify(ingredientService, times(1)).deleteIngredientCommand(any());
-//        verify(recipeRepository, times(1)).findById(any());
-//        verify(ingredientCommandToIngredient, times(1)).convert(any());
-//        verify(recipeRepository, times(1)).save(any());
-
     }
 }
