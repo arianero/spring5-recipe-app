@@ -32,9 +32,6 @@ public class IngredientServiceImplTest {
     @Mock
     UnitOfMeasureRepository unitOfMeasureRepository;
 
-    @Mock
-    IngredientRepository ingredientRepository;
-
     IngredientService ingredientService;
 
     //init converters
@@ -48,7 +45,7 @@ public class IngredientServiceImplTest {
         MockitoAnnotations.initMocks(this);
 
         ingredientService = new IngredientServiceImpl(ingredientToIngredientCommand, ingredientCommandToIngredient,
-                recipeRepository, unitOfMeasureRepository, ingredientRepository);
+                recipeRepository, unitOfMeasureRepository);
     }
 
     @Test
